@@ -1,8 +1,8 @@
 const sequelize  = require('./DBconfig')
 const DataTypes = require('sequelize')
 
+//create model for database operations
 const User = sequelize.define('users', {
-    // Model attributes are defined here
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,

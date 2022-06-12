@@ -1,16 +1,12 @@
 const express = require('express')
 const axios = require('axios')
-const sequelize = require('../database/DBconfig')
 const User = require('../database/user')
-const { response } = require('express')
-const asyncHandler = require('express-async-handler')
-const e = require('express')
 
 const router = express.Router()
 
 
 router.post("/", (req, res) => {
-    
+    // request to consume data from api
     axios.post( 
         'http://54.221.58.163/api/channels',
         {},
@@ -18,10 +14,12 @@ router.post("/", (req, res) => {
       )
       .then( async ({data}) => {
         try{
+          // saves data to database
           res.json(await User.bulkCreate(data.data))
           res.status(200).sendStatus()
         }
         catch(error){
+          // error handling
           console.error(error)
           res.status(500)
           res.json({})
